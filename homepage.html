@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Sistem Informasi - PT MBP</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --border: #e2e8f0;
+      --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+
+    .header-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .brand span {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .badge {
+      font-size: 0.8rem;
+      background: #eff6ff;
+      color: var(--primary);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1040px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    .hero {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 32px -8px rgba(15, 23, 42, 0.12);
+      border-color: #bfdbfe;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #eff6ff;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 12px 18px;
+      border-radius: 10px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">PT MBP <span>| Portal Sistem Informasi</span></div>
+      <div class="badge">3 Sistem Aktif</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Pusat Akses Sistem Informasi</h1>
+      <p>Pilih modul sistem di bawah ini sesuai kebutuhan pemantauan, pengecekan stok, maupun pelaporan penutupan operasional.</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <div>
+          <div class="card-icon">01</div>
+          <h2>Monitoring Titip Proses</h2>
+          <p>Pantau status dan alur barang atau pekerjaan titip proses secara terpantau dan terstruktur.</p>
+        </div>
+        <a class="btn" href="https://monitoringtitipproses.ptmbp.my.id/" target="_blank" rel="noopener noreferrer">
+          Buka Sistem →
+        </a>
+      </article>
+
+      <article class="card">
+        <div>
+          <div class="card-icon">02</div>
+          <h2>Stok Realtime</h2>
+          <p>Cek ketersediaan dan pergerakan stok terkini secara langsung untuk mendukung operasional harian.</p>
+        </div>
+        <a class="btn" href="https://stokrealtime.ptmbp.my.id/" target="_blank" rel="noopener noreferrer">
+          Buka Sistem →
+        </a>
+      </article>
+
+      <article class="card">
+        <div>
+          <div class="card-icon">03</div>
+          <h2>Closing Report</h2>
+          <p>Akses rekap dan laporan akhir periode/closing untuk evaluasi serta dokumentasi manajemen.</p>
+        </div>
+        <a class="btn" href="https://closingreport.ptmbp.my.id/" target="_blank" rel="noopener noreferrer">
+          Buka Sistem →
+        </a>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2026 PT MBP. Seluruh hak cipta dilindungi.
+  </footer>
+</body>
+</html>
