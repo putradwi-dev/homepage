@@ -424,31 +424,6 @@
       border: 1px solid #a7f3d0;
     }
 
-    .menu-choices {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .menu-choice-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      text-decoration: none;
-      background: #ffffff;
-      color: var(--primary);
-      border: 1px solid #6ee7b7;
-      border-radius: 8px;
-      padding: 8px 12px;
-      font-weight: 600;
-      font-size: 0.86rem;
-    }
-
-    .menu-choice-link:hover {
-      background: #d1fae5;
-    }
-
     .modal-actions {
       display: flex;
       justify-content: flex-end;
@@ -599,8 +574,8 @@
       <form id="employeeLoginForm">
         <div class="form-group">
           <label for="inputTarget">Tujuan Form Input Data</label>
-          <select id="inputTarget" name="inputTarget">
-            <option value="">-- Otomatis (Sesuai Hak Akses Akun) --</option>
+          <select id="inputTarget" name="inputTarget" required>
+            <option value="">-- Pilih Tujuan Form Input Data --</option>
             <option value="titip-proses">Input Data Titip Proses</option>
             <option value="stok-realtime">Input Data Stok Realtime</option>
             <option value="closing-report">Input Data Closing Report</option>
@@ -633,7 +608,7 @@
 
   <script>
     // Ganti dengan URL Web App Google Apps Script (/exec) yang sudah di-deploy
-    const AUTH_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzrLBbkbp5AWPPDz6Ebsprx1r61mNe9OGQfnsYubB2wODTeqce8gqpcrk20Q1kpWXzFqQ/exec';
+    const AUTH_WEB_APP_URL = 'GANTI_DENGAN_URL_WEB_APP_APPS_SCRIPT_ANDA';
 
     const openBtn = document.getElementById('openLoginModal');
     const closeBtn = document.getElementById('closeLoginModal');
@@ -643,27 +618,9 @@
     const feedback = document.getElementById('loginFeedback');
     const submitBtn = document.getElementById('submitLoginBtn');
 
-    function setFeedback(type, message, menus = []) {
+    function setFeedback(type, message) {
       feedback.className = 'login-feedback show ' + type;
-      feedback.textContent = '';
-
-      const textEl = document.createElement('div');
-      textEl.textContent = message;
-      feedback.appendChild(textEl);
-
-      if (Array.isArray(menus) && menus.length > 0) {
-        const listEl = document.createElement('div');
-        listEl.className = 'menu-choices';
-        menus.forEach(item => {
-          if (!item || !item.url) return;
-          const link = document.createElement('a');
-          link.className = 'menu-choice-link';
-          link.href = item.url;
-          link.textContent = (item.label || 'Buka Form Input') + ' →';
-          listEl.appendChild(link);
-        });
-        feedback.appendChild(listEl);
-      }
+      feedback.textContent = message;
     }
 
     function clearFeedback() {
@@ -674,7 +631,7 @@
     function openModal() {
       clearFeedback();
       modal.classList.add('active');
-      document.getElementById('staffUsername').focus();
+      document.getElementById('inputTarget').focus();
     }
 
     function closeModal() {
@@ -701,9 +658,14 @@
       e.preventDefault();
       clearFeedback();
 
+      const target = document.getElementById('inputTarget').value;
       const username = document.getElementById('staffUsername').value.trim();
       const password = document.getElementById('staffPassword').value;
-      const target = document.getElementById('inputTarget').value;
+
+      if (!target) {
+        setFeedback('error', 'Silakan pilih tujuan form input data terlebih dahulu.');
+        return;
+      }
 
       if (!AUTH_WEB_APP_URL || AUTH_WEB_APP_URL.includes('GANTI_DENGAN_URL_WEB_APP')) {
         setFeedback('error', 'URL Web App Google Apps Script belum diatur pada file index.html.');
@@ -734,26 +696,23 @@
           return;
         }
 
+        if (!data.redirectUrl) {
+          setFeedback('error', 'URL tujuan form input data belum diatur pada server.');
+          return;
+        }
+
         sessionStorage.setItem('mbp_auth_session', JSON.stringify({
           user: data.user,
+          target: target,
           loggedInAt: new Date().toISOString()
         }));
 
         const nama = (data.user && data.user.nama_karyawan) || username;
+        setFeedback('success', 'Login berhasil, selamat datang ' + nama + '. Mengalihkan ke ' + (data.targetLabel || 'halaman tujuan') + '...');
 
-        if (data.redirectUrl) {
-          setFeedback('success', 'Login berhasil, selamat datang ' + nama + '. Mengalihkan...', data.menus || []);
-          setTimeout(() => {
-            window.location.href = data.redirectUrl;
-          }, 500);
-          return;
-        }
-
-        if (Array.isArray(data.menus) && data.menus.length > 0) {
-          setFeedback('success', 'Login berhasil (' + nama + '). Pilih form input data:', data.menus);
-        } else {
-          setFeedback('error', 'Login berhasil, tetapi belum ada menu input data yang terhubung untuk akun ini.');
-        }
+        setTimeout(() => {
+          window.location.href = data.redirectUrl;
+        }, 400);
       } catch (err) {
         setFeedback('error', 'Gagal terhubung ke server autentikasi. Coba beberapa saat lagi.');
       } finally {
