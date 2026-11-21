@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/putradwi-dev/homepage/main/favicon.png">
+
+  <!-- Open Graph / WhatsApp Preview Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Portal Sistem Informasi">
+  <meta property="og:description" content="Pusat Akses Sistem Informasi">
+  <meta property="og:image" content="https://raw.githubusercontent.com/putradwi-dev/homepage/main/preview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://ptmbp.my.id/">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal Sistem Informasi - PT MBP</title>
@@ -47,7 +59,7 @@
     }
 
     .brand {
-      font-size: 1.25rem;
+      font-size: 1.55rem;
       font-weight: 700;
       color: var(--primary);
       letter-spacing: -0.02em;
@@ -109,19 +121,20 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
       box-shadow: 0 18px 32px -8px rgba(15, 23, 42, 0.12);
       border-color: #bfdbfe;
     }
 
+    /* Container & Tema Ikon Animasi */
     .card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
       background: #eff6ff;
       color: var(--primary);
       display: flex;
@@ -130,6 +143,93 @@
       font-weight: 700;
       font-size: 1.1rem;
       margin-bottom: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.06);
+    }
+
+    .icon-monitoring {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .icon-stok {
+      background: #ecfdf5;
+      color: #059669;
+    }
+
+    .icon-closing {
+      background: #fffbeb;
+      color: #d97706;
+    }
+
+    /* 1. Animasi Radar Monitoring */
+    .radar-ring {
+      transform-origin: 12px 12px;
+      animation: radarPulse 2.4s infinite ease-out;
+    }
+
+    .radar-dot {
+      animation: dotBlink 1.8s infinite ease-in-out;
+    }
+
+    @keyframes radarPulse {
+      0% {
+        transform: scale(0.85);
+        opacity: 0.9;
+      }
+      70% {
+        transform: scale(1.18);
+        opacity: 0.15;
+      }
+      100% {
+        transform: scale(0.85);
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes dotBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    /* 2. Animasi Kotak Stok Mengambang */
+    .box-float {
+      animation: floatBox 2.8s infinite ease-in-out;
+    }
+
+    @keyframes floatBox {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-2.5px); }
+    }
+
+    /* 3. Animasi Grafik Batang Closing Report */
+    .bar-1 {
+      transform-origin: bottom;
+      animation: barGrow1 2.2s infinite ease-in-out;
+    }
+    .bar-2 {
+      transform-origin: bottom;
+      animation: barGrow2 2.2s infinite ease-in-out;
+    }
+    .bar-3 {
+      transform-origin: bottom;
+      animation: barGrow3 2.2s infinite ease-in-out;
+    }
+
+    @keyframes barGrow1 {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.65); }
+    }
+    @keyframes barGrow2 {
+      0%, 100% { transform: scaleY(0.75); }
+      50% { transform: scaleY(1.1); }
+    }
+    @keyframes barGrow3 {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.7); }
     }
 
     .card h2 {
@@ -176,55 +276,75 @@
 <body>
   <header>
     <div class="header-inner">
-      <div class="brand">PT MBP <span>| Portal Sistem Informasi</span></div>
-      <div class="badge">3 Sistem Aktif</div>
+      <div class="brand">PT. MAKMUR BERUNTUNG PISAN <span>| Portal Sistem Informasi</span></div>
+      <div class="badge">3 Website Aktif</div>
     </div>
   </header>
 
   <main>
     <section class="hero">
       <h1>Pusat Akses Sistem Informasi</h1>
-      <p>Pilih modul sistem di bawah ini sesuai kebutuhan pemantauan, pengecekan stok, maupun pelaporan penutupan operasional.</p>
+      <p>Pilih menu sesuai kebutuhan informasi yang diperlukan.</p>
     </section>
 
     <section class="grid">
       <article class="card">
         <div>
-          <div class="card-icon">01</div>
-          <h2>Monitoring Titip Proses</h2>
-          <p>Pantau status dan alur barang atau pekerjaan titip proses secara terpantau dan terstruktur.</p>
+          <div class="card-icon icon-monitoring">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="radar-ring" cx="12" cy="12" r="9" stroke-opacity="0.35" />
+              <circle cx="12" cy="12" r="5" />
+              <circle class="radar-dot" cx="12" cy="12" r="1.5" fill="currentColor" />
+              <path d="M12 3v2M12 19v2M3 12h2M19 12h2" />
+            </svg>
+          </div>
+          <h2>MONITORING TITIP PROSES</h2>
+          <p>Pantau status dan alur pesanan, atau stok titipan secara realtime dan terstruktur.</p>
         </div>
-        <a class="btn" href="https://monitoringtitipproses.ptmbp.my.id/" target="_blank" rel="noopener noreferrer">
-          Buka Sistem →
+        <a class="btn" href="https://monitoringtitipproses.ptmbp.my.id/">
+          Ke Website →
         </a>
       </article>
 
       <article class="card">
         <div>
-          <div class="card-icon">02</div>
-          <h2>Stok Realtime</h2>
-          <p>Cek ketersediaan dan pergerakan stok terkini secara langsung untuk mendukung operasional harian.</p>
+          <div class="card-icon icon-stok">
+            <svg class="box-float" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+              <path d="m3.3 7 8.7 5 8.7-5" />
+              <path d="M12 22V12" />
+            </svg>
+          </div>
+          <h2>STOK REALTIME</h2>
+          <p>Cek ketersediaan stok barang secara langsung untuk mendukung operasional harian.</p>
         </div>
-        <a class="btn" href="https://stokrealtime.ptmbp.my.id/" target="_blank" rel="noopener noreferrer">
-          Buka Sistem →
+        <a class="btn" href="https://stokrealtime.ptmbp.my.id/">
+          Ke Website →
         </a>
       </article>
 
       <article class="card">
         <div>
-          <div class="card-icon">03</div>
-          <h2>Closing Report</h2>
-          <p>Akses rekap dan laporan akhir periode/closing untuk evaluasi serta dokumentasi manajemen.</p>
+          <div class="card-icon icon-closing">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="3" />
+              <line class="bar-1" x1="8" y1="17" x2="8" y2="12" stroke-width="2.5" />
+              <line class="bar-2" x1="12" y1="17" x2="12" y2="8" stroke-width="2.5" />
+              <line class="bar-3" x1="16" y1="17" x2="16" y2="10" stroke-width="2.5" />
+            </svg>
+          </div>
+          <h2>CLOSING REPORT</h2>
+          <p>Rekap dan laporan closing penjualan untuk evaluasi serta dokumentasi manajemen.</p>
         </div>
-        <a class="btn" href="https://closingreport.ptmbp.my.id/" target="_blank" rel="noopener noreferrer">
-          Buka Sistem →
+        <a class="btn" href="https://closingreport.ptmbp.my.id/">
+          Ke Website →
         </a>
       </article>
     </section>
   </main>
 
   <footer>
-    &copy; 2026 PT MBP. Seluruh hak cipta dilindungi.
+    PT. MBP &copy; 2026. Seluruh hak cipta dilindungi.
   </footer>
 </body>
 </html>
