@@ -5,8 +5,8 @@
 
   <!-- Open Graph / WhatsApp Preview Meta Tags -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Portal Sistem Informasi PT. MBP">
-  <meta property="og:description" content="Pusat Akses Sistem Informasi PT. MBP">
+  <meta property="og:title" content="Portal Sistem Informasi">
+  <meta property="og:description" content="Pusat Akses Sistem Informasi">
   <meta property="og:image" content="https://raw.githubusercontent.com/putradwi-dev/homepage/main/preview.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
@@ -85,6 +85,8 @@
       width: 100%;
       margin: 0 auto;
       padding: 48px 24px;
+      display: flex;
+      flex-direction: column;
     }
 
     .hero {
@@ -278,6 +280,178 @@
       background: var(--primary-hover);
     }
 
+    /* Area pojok kanan bawah di atas footer */
+    .bottom-action {
+      margin-top: 28px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .btn-login-input {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+      transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-login-input:hover {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* Modal Form Login Karyawan */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 420px;
+      padding: 28px;
+      box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.22);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .btn-close {
+      background: transparent;
+      border: none;
+      font-size: 1.35rem;
+      line-height: 1;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .btn-close:hover {
+      color: var(--text);
+    }
+
+    .modal-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .login-notice {
+      font-size: 0.82rem;
+      color: #b45309;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      padding: 10px 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      line-height: 1.45;
+      display: none;
+    }
+
+    .login-notice.show {
+      display: block;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: var(--text);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-hover);
+    }
+
     footer {
       text-align: center;
       padding: 24px;
@@ -362,10 +536,151 @@
         </a>
       </article>
     </section>
+
+    <div class="bottom-action">
+      <button type="button" class="btn-login-input" id="openLoginModal">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+        Login Input Data
+      </button>
+    </div>
   </main>
+
+  <!-- Modal Form Login Karyawan -->
+  <div class="modal-backdrop" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="loginModalTitle">Login Karyawan — Input Data</h3>
+        <button type="button" class="btn-close" id="closeLoginModal" aria-label="Tutup">&times;</button>
+      </div>
+      <p class="modal-desc">Masuk menggunakan akun internal karyawan untuk mengakses halaman input data.</p>
+
+      <form id="employeeLoginForm">
+        <div class="form-group">
+          <label for="inputTarget">Tujuan Form Input Data</label>
+          <select id="inputTarget" name="inputTarget">
+            <option value="">-- Pilih Web Input Data (Segera Hadir) --</option>
+            <option value="input-1">Input Data Titip Proses</option>
+            <option value="input-2">Web Input Data 2 (Belum dikonfigurasi)</option>
+            <option value="input-3">Web Input Data 3 (Belum dikonfigurasi)</option>
+            <option value="input-4">Web Input Data 4 (Belum dikonfigurasi)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="staffUsername">Username / ID Karyawan</label>
+          <input type="text" id="staffUsername" name="staffUsername" placeholder="Masukkan ID atau username" autocomplete="username" required />
+        </div>
+
+        <div class="form-group">
+          <label for="staffPassword">Password</label>
+          <input type="password" id="staffPassword" name="staffPassword" placeholder="Masukkan password" autocomplete="current-password" required />
+        </div>
+
+        <div class="login-notice" id="loginNotice">
+          Form login ini disiapkan sebagai kerangka awal. Autentikasi dan URL tujuan web input data dapat dihubungkan setelah sistem autentikasi dan link halaman input siap.
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="cancelLoginModal">Batal</button>
+          <button type="submit" class="btn-submit">Masuk</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <footer>
     PT. MBP &copy; 2026. Seluruh hak cipta dilindungi.
   </footer>
+
+  <script>
+    const openBtn = document.getElementById('openLoginModal');
+    const closeBtn = document.getElementById('closeLoginModal');
+    const cancelBtn = document.getElementById('cancelLoginModal');
+    const modal = document.getElementById('loginModal');
+    const form = document.getElementById('employeeLoginForm');
+    const notice = document.getElementById('loginNotice');
+
+    function openModal() {
+      notice.classList.remove('show');
+      modal.classList.add('active');
+      document.getElementById('staffUsername').focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+	
+	const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxVJzu_6xP8nYAQbLXIdO390ags_c7Rcc2R9xm0aX1-VL4TsMXmxfMvh5sgj6hw0T4s/exec";
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const username = document.getElementById("staffUsername").value.trim();
+  const password = document.getElementById("staffPassword").value;
+  const menu = document.getElementById("inputTarget").value;
+
+  notice.classList.remove("show");
+  notice.textContent = "Memverifikasi akun...";
+  notice.classList.add("show");
+
+  try {
+    const res = await fetch(GAS_WEB_APP_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ username, password, menu })
+    });
+
+    const data = await res.json();
+
+    if (!data.ok) {
+      notice.textContent = data.message || "Login gagal.";
+      return;
+    }
+
+    // Jika memilih satu menu spesifik, arahkan langsung ke link-nya
+    if (data.redirectUrl) {
+      window.location.href = data.redirectUrl;
+      return;
+    }
+
+    // Jika belum memilih menu spesifik, tampilkan link yang diizinkan untuk akun tersebut
+    const firstUrl = Object.values(data.menus || {})[0];
+    if (firstUrl) {
+      window.location.href = firstUrl;
+    } else {
+      notice.textContent = "Login berhasil, namun belum ada link input yang terhubung.";
+    }
+  } catch (err) {
+    notice.textContent = "Gagal menghubungi server autentikasi. Coba lagi.";
+  }
+});
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Tempat integrasi verifikasi kredensial & pengalihan ke URL web input data
+      notice.classList.add('show');
+    });
+	
+	
+  </script>
 </body>
 </html>
