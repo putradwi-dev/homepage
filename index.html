@@ -399,11 +399,8 @@
       border-color: var(--primary);
     }
 
-    .login-notice {
-      font-size: 0.82rem;
-      color: #b45309;
-      background: #fffbeb;
-      border: 1px solid #fde68a;
+    .login-feedback {
+      font-size: 0.84rem;
       padding: 10px 12px;
       border-radius: 8px;
       margin-bottom: 16px;
@@ -411,8 +408,45 @@
       display: none;
     }
 
-    .login-notice.show {
+    .login-feedback.show {
       display: block;
+    }
+
+    .login-feedback.error {
+      color: #b91c1c;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+    }
+
+    .login-feedback.success {
+      color: #047857;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+    }
+
+    .menu-choices {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .menu-choice-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      background: #ffffff;
+      color: var(--primary);
+      border: 1px solid #6ee7b7;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-weight: 600;
+      font-size: 0.86rem;
+    }
+
+    .menu-choice-link:hover {
+      background: #d1fae5;
     }
 
     .modal-actions {
@@ -450,6 +484,11 @@
 
     .btn-submit:hover {
       background: var(--primary-hover);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
     }
 
     footer {
@@ -561,11 +600,10 @@
         <div class="form-group">
           <label for="inputTarget">Tujuan Form Input Data</label>
           <select id="inputTarget" name="inputTarget">
-            <option value="">-- Pilih Web Input Data (Segera Hadir) --</option>
-            <option value="input-1">Input Data Titip Proses</option>
-            <option value="input-2">Web Input Data 2 (Belum dikonfigurasi)</option>
-            <option value="input-3">Web Input Data 3 (Belum dikonfigurasi)</option>
-            <option value="input-4">Web Input Data 4 (Belum dikonfigurasi)</option>
+            <option value="">-- Otomatis (Sesuai Hak Akses Akun) --</option>
+            <option value="titip-proses">Input Data Titip Proses</option>
+            <option value="stok-realtime">Input Data Stok Realtime</option>
+            <option value="closing-report">Input Data Closing Report</option>
           </select>
         </div>
 
@@ -579,13 +617,11 @@
           <input type="password" id="staffPassword" name="staffPassword" placeholder="Masukkan password" autocomplete="current-password" required />
         </div>
 
-        <div class="login-notice" id="loginNotice">
-          Form login ini disiapkan sebagai kerangka awal. Autentikasi dan URL tujuan web input data dapat dihubungkan setelah sistem autentikasi dan link halaman input siap.
-        </div>
+        <div class="login-feedback" id="loginFeedback" role="status" aria-live="polite"></div>
 
         <div class="modal-actions">
           <button type="button" class="btn-secondary" id="cancelLoginModal">Batal</button>
-          <button type="submit" class="btn-submit">Masuk</button>
+          <button type="submit" class="btn-submit" id="submitLoginBtn">Masuk</button>
         </div>
       </form>
     </div>
@@ -596,15 +632,47 @@
   </footer>
 
   <script>
+    // Ganti dengan URL Web App Google Apps Script (/exec) yang sudah di-deploy
+    const AUTH_WEB_APP_URL = 'GANTI_DENGAN_URL_WEB_APP_APPS_SCRIPT_ANDA';
+
     const openBtn = document.getElementById('openLoginModal');
     const closeBtn = document.getElementById('closeLoginModal');
     const cancelBtn = document.getElementById('cancelLoginModal');
     const modal = document.getElementById('loginModal');
     const form = document.getElementById('employeeLoginForm');
-    const notice = document.getElementById('loginNotice');
+    const feedback = document.getElementById('loginFeedback');
+    const submitBtn = document.getElementById('submitLoginBtn');
+
+    function setFeedback(type, message, menus = []) {
+      feedback.className = 'login-feedback show ' + type;
+      feedback.textContent = '';
+
+      const textEl = document.createElement('div');
+      textEl.textContent = message;
+      feedback.appendChild(textEl);
+
+      if (Array.isArray(menus) && menus.length > 0) {
+        const listEl = document.createElement('div');
+        listEl.className = 'menu-choices';
+        menus.forEach(item => {
+          if (!item || !item.url) return;
+          const link = document.createElement('a');
+          link.className = 'menu-choice-link';
+          link.href = item.url;
+          link.textContent = (item.label || 'Buka Form Input') + ' →';
+          listEl.appendChild(link);
+        });
+        feedback.appendChild(listEl);
+      }
+    }
+
+    function clearFeedback() {
+      feedback.className = 'login-feedback';
+      feedback.textContent = '';
+    }
 
     function openModal() {
-      notice.classList.remove('show');
+      clearFeedback();
       modal.classList.add('active');
       document.getElementById('staffUsername').focus();
     }
@@ -622,51 +690,6 @@
         closeModal();
       }
     });
-	
-	const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzrLBbkbp5AWPPDz6Ebsprx1r61mNe9OGQfnsYubB2wODTeqce8gqpcrk20Q1kpWXzFqQ/exec";
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const username = document.getElementById("staffUsername").value.trim();
-  const password = document.getElementById("staffPassword").value;
-  const menu = document.getElementById("inputTarget").value;
-
-  notice.classList.remove("show");
-  notice.textContent = "Memverifikasi akun...";
-  notice.classList.add("show");
-
-  try {
-    const res = await fetch(GAS_WEB_APP_URL, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ username, password, menu })
-    });
-
-    const data = await res.json();
-
-    if (!data.ok) {
-      notice.textContent = data.message || "Login gagal.";
-      return;
-    }
-
-    // Jika memilih satu menu spesifik, arahkan langsung ke link-nya
-    if (data.redirectUrl) {
-      window.location.href = data.redirectUrl;
-      return;
-    }
-
-    // Jika belum memilih menu spesifik, tampilkan link yang diizinkan untuk akun tersebut
-    const firstUrl = Object.values(data.menus || {})[0];
-    if (firstUrl) {
-      window.location.href = firstUrl;
-    } else {
-      notice.textContent = "Login berhasil, namun belum ada link input yang terhubung.";
-    }
-  } catch (err) {
-    notice.textContent = "Gagal menghubungi server autentikasi. Coba lagi.";
-  }
-});
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.classList.contains('active')) {
@@ -674,13 +697,70 @@ form.addEventListener("submit", async (e) => {
       }
     });
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // Tempat integrasi verifikasi kredensial & pengalihan ke URL web input data
-      notice.classList.add('show');
+      clearFeedback();
+
+      const username = document.getElementById('staffUsername').value.trim();
+      const password = document.getElementById('staffPassword').value;
+      const target = document.getElementById('inputTarget').value;
+
+      if (!AUTH_WEB_APP_URL || AUTH_WEB_APP_URL.includes('GANTI_DENGAN_URL_WEB_APP')) {
+        setFeedback('error', 'URL Web App Google Apps Script belum diatur pada file index.html.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Memeriksa...';
+
+      try {
+        const response = await fetch(AUTH_WEB_APP_URL, {
+          method: 'POST',
+          redirect: 'follow',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+            target: target
+          })
+        });
+
+        const data = await response.json();
+
+        if (!data || !data.success) {
+          setFeedback('error', (data && data.message) || 'Login gagal. Periksa kembali akun Anda.');
+          return;
+        }
+
+        sessionStorage.setItem('mbp_auth_session', JSON.stringify({
+          user: data.user,
+          loggedInAt: new Date().toISOString()
+        }));
+
+        const nama = (data.user && data.user.nama_karyawan) || username;
+
+        if (data.redirectUrl) {
+          setFeedback('success', 'Login berhasil, selamat datang ' + nama + '. Mengalihkan...', data.menus || []);
+          setTimeout(() => {
+            window.location.href = data.redirectUrl;
+          }, 500);
+          return;
+        }
+
+        if (Array.isArray(data.menus) && data.menus.length > 0) {
+          setFeedback('success', 'Login berhasil (' + nama + '). Pilih form input data:', data.menus);
+        } else {
+          setFeedback('error', 'Login berhasil, tetapi belum ada menu input data yang terhubung untuk akun ini.');
+        }
+      } catch (err) {
+        setFeedback('error', 'Gagal terhubung ke server autentikasi. Coba beberapa saat lagi.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Masuk';
+      }
     });
-	
-	
   </script>
 </body>
 </html>
