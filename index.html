@@ -18,14 +18,15 @@
   <title>Portal Sistem Informasi - PT MBP</title>
   <style>
     :root {
-      --bg: #f4f7fb;
+      --bg: #faf6f0;
       --surface: #ffffff;
-      --text: #0f172a;
-      --muted: #64748b;
-      --primary: #1d4ed8;
-      --primary-hover: #1e40af;
-      --border: #e2e8f0;
-      --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+      --text: #271a12;
+      --muted: #6e5849;
+      --primary: #8c4314;
+      --primary-hover: #6f330d;
+      --accent-soft: #f5eadc;
+      --border: #e6d8c5;
+      --shadow: 0 10px 25px -5px rgba(58, 34, 16, 0.08);
     }
 
     * {
@@ -44,9 +45,10 @@
     }
 
     header {
-      background-color: var(--surface);
-      border-bottom: 1px solid var(--border);
+      background: linear-gradient(90deg, #1d110a 0%, #3b1e0c 55%, #7c3a10 100%);
+      border-bottom: 1px solid #4c2710;
       padding: 20px 24px;
+      color: #ffffff;
     }
 
     .header-inner {
@@ -61,22 +63,24 @@
     .brand {
       font-size: 1.55rem;
       font-weight: 700;
-      color: var(--primary);
+      color: #ffffff	;
       letter-spacing: -0.02em;
     }
 
     .brand span {
-      color: var(--text);
+      color: #f3d2b3;
       font-weight: 600;
     }
 
     .badge {
       font-size: 0.8rem;
-      background: #eff6ff;
-      color: var(--primary);
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff3e6;
+      border: 1px solid rgba(255, 255, 255, 0.22);
       padding: 6px 12px;
       border-radius: 999px;
       font-weight: 600;
+      white-space: nowrap;
     }
 
     main {
@@ -100,6 +104,7 @@
       font-weight: 700;
       margin-bottom: 12px;
       letter-spacing: -0.02em;
+      color: var(--text);
     }
 
     .hero p {
@@ -134,8 +139,8 @@
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 18px 32px -8px rgba(15, 23, 42, 0.12);
-      border-color: #bfdbfe;
+      box-shadow: 0 18px 32px -8px rgba(58, 34, 16, 0.14);
+      border-color: #cfa982;
     }
 
     /* Header Kartu (Ikon Sejajar Judul) */
@@ -151,7 +156,7 @@
       width: 48px;
       height: 48px;
       border-radius: 13px;
-      background: #eff6ff;
+      background: var(--accent-soft);
       color: var(--primary);
       display: flex;
       align-items: center;
@@ -167,18 +172,18 @@
     }
 
     .icon-monitoring {
-      background: #eff6ff;
-      color: #2563eb;
+      background: #f7ece1;
+      color: #8c4314;
     }
 
     .icon-stok {
-      background: #ecfdf5;
-      color: #059669;
+      background: #efe6d8;
+      color: #5c3214;
     }
 
     .icon-closing {
-      background: #fffbeb;
-      color: #d97706;
+      background: #fdf2dc;
+      color: #b45309;
     }
 
     /* 1. Animasi Radar Monitoring */
@@ -252,6 +257,7 @@
       font-size: 1.05rem;
       line-height: 1.25;
       margin-bottom: 0;
+      color: var(--text);
     }
 
     .card p {
@@ -300,13 +306,13 @@
       font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+      box-shadow: 0 4px 12px rgba(58, 34, 16, 0.06);
       transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
     }
 
     .btn-login-input:hover {
-      background: #eff6ff;
-      border-color: #93c5fd;
+      background: var(--accent-soft);
+      border-color: #c89d72;
       color: var(--primary);
       transform: translateY(-2px);
     }
@@ -315,7 +321,7 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.5);
+      background: rgba(29, 17, 10, 0.55);
       display: none;
       align-items: center;
       justify-content: center;
@@ -334,7 +340,7 @@
       width: 100%;
       max-width: 420px;
       padding: 28px;
-      box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.22);
+      box-shadow: 0 24px 48px -12px rgba(29, 17, 10, 0.28);
     }
 
     .modal-header {
@@ -347,6 +353,7 @@
     .modal-header h3 {
       font-size: 1.15rem;
       font-weight: 700;
+      color: var(--text);
     }
 
     .btn-close {
@@ -419,9 +426,9 @@
     }
 
     .login-feedback.success {
-      color: #047857;
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
+      color: #5c2b0a;
+      background: #fdf3e4;
+      border: 1px solid #e6c59c;
     }
 
     .modal-actions {
@@ -432,7 +439,7 @@
     }
 
     .btn-secondary {
-      background: #f1f5f9;
+      background: #f3ece2;
       color: var(--text);
       border: none;
       border-radius: 10px;
@@ -443,7 +450,7 @@
     }
 
     .btn-secondary:hover {
-      background: #e2e8f0;
+      background: #e6d9c7;
     }
 
     .btn-submit {
@@ -569,7 +576,7 @@
         <h3 id="loginModalTitle">LOGIN KARYAWAN — Input Data</h3>
         <button type="button" class="btn-close" id="closeLoginModal" aria-label="Tutup">&times;</button>
       </div>
-      <p class="modal-desc">Masuk menggunakan akun internal karyawan<br>	untuk mengakses halaman input data.</p>
+      <p class="modal-desc">Masuk menggunakan akun internal karyawan<br>untuk mengakses halaman input data.</p>
 
       <form id="employeeLoginForm">
         <div class="form-group">
@@ -579,7 +586,7 @@
             <option value="nomor-do">Input Data Nomor DO</option>
             <option value="stok-titipan">Input Stok Titipan PT. MBP</option>
             <option value="konfirmasi">Input Konfirmasi Packing & Kirim</option>
-			<option value="closing">Input Closing Report Harian</option>
+            <option value="closing">Input Closing Report Harian</option>
           </select>
         </div>
 
@@ -608,7 +615,7 @@
   </footer>
 
   <script>
-    // Ganti dengan URL Web App Google Apps Script (/exec) yang sudah di-deploy
+    // URL Web App Google Apps Script (/exec) yang sudah di-deploy
     const AUTH_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzrLBbkbp5AWPPDz6Ebsprx1r61mNe9OGQfnsYubB2wODTeqce8gqpcrk20Q1kpWXzFqQ/exec';
 
     const openBtn = document.getElementById('openLoginModal');
