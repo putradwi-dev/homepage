@@ -473,14 +473,26 @@
       cursor: not-allowed;
     }
 
-    footer {
-      text-align: center;
-      padding: 24px;
-      color: var(--muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
-      background: var(--surface);
-    }
+footer {
+  text-align: center;
+  padding: 20px 24px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.footer-logo {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
   </style>
 </head>
 <body>
@@ -610,9 +622,14 @@
     </div>
   </div>
 
-  <footer>
-    PT. MBP &copy; 2026. Seluruh hak cipta dilindungi.
-  </footer>
+ <footer>
+  <img
+    src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/ptmbp.png"
+    alt="PT. MBP"
+    class="footer-logo"
+  />
+  <span>&copy; 2026. Seluruh hak cipta dilindungi.</span>
+</footer>
 
   <script>
     // URL Web App Google Apps Script (/exec) yang sudah di-deploy
