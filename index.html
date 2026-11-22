@@ -17,58 +17,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal Sistem Informasi - PT MBP</title>
   <style>
- 
-	@property --shimmer-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.ecommerce-section {
-  position: relative;
-  margin-top: 24px;
-  background: var(--surface);
-  border: 1px solid transparent;
-  border-radius: 16px;
-  padding: 18px 24px;
-  box-shadow: var(--shadow);
-  width: fit-content;
-  max-width: 100%;
-  align-self: center;
-  z-index: 0;
-}
-
-.ecommerce-section::before {
-  content: "";
-  position: absolute;
-  inset: -1.5px;
-  border-radius: 17.5px;
-  padding: 3px;
-  background: conic-gradient(
-    from var(--shimmer-angle),
-    var(--border) 0%,
-    var(--border) 68%,
-    #e2a868 80%,
-    #fff3dc 85%,
-    #c87d32 90%,
-    var(--border) 100%
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: -1;
-  animation: slowShimmerSpin 9s linear infinite;
-}
-
-@keyframes slowShimmerSpin {
-  to {
-    --shimmer-angle: 360deg;
-  }
-}
-  
     :root {
       --bg: #faf6f0;
       --surface: #ffffff;
@@ -79,6 +27,12 @@
       --accent-soft: #f5eadc;
       --border: #e6d8c5;
       --shadow: 0 10px 25px -5px rgba(58, 34, 16, 0.08);
+    }
+
+    @property --shimmer-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
     }
 
     * {
@@ -338,6 +292,24 @@
       background: var(--primary-hover);
     }
 
+    .btn.btn-disabled,
+    .btn.btn-disabled:hover {
+      background: #c8b8a6;
+      color: #6e5849;
+      cursor: not-allowed;
+      pointer-events: none;
+      box-shadow: none;
+    }
+
+    .coming-soon-note {
+      margin-top: -36px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #9a5b13;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
     /* Area tombol login input data */
     .bottom-action {
       margin-top: 24px;
@@ -369,18 +341,51 @@
       transform: translateY(-2px);
     }
 
-    /* Bagian bawah: Daftar Website E-Commerce Aktif */
-.ecommerce-section {
-  margin-top: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 18px 24px;
-  box-shadow: var(--shadow);
-  width: fit-content;
-  max-width: 100%;
-  align-self: center;
-}
+    /* Bagian bawah: Daftar Website E-Commerce & Lokasi Gudang */
+    .ecommerce-section {
+      position: relative;
+      margin-top: 24px;
+      background: var(--surface);
+      border: 1px solid transparent;
+      border-radius: 16px;
+      padding: 18px 24px;
+      box-shadow: var(--shadow);
+      width: fit-content;
+      max-width: 100%;
+      align-self: center;
+      z-index: 0;
+    }
+
+    .ecommerce-section::before {
+      content: "";
+      position: absolute;
+      inset: -1.5px;
+      border-radius: 17.5px;
+      padding: 3px;
+      background: conic-gradient(
+        from var(--shimmer-angle),
+        var(--border) 0%,
+        var(--border) 68%,
+        #e2a868 80%,
+        #fff3dc 85%,
+        #c87d32 90%,
+        var(--border) 100%
+      );
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: -1;
+      animation: slowShimmerSpin 9s linear infinite;
+    }
+
+    @keyframes slowShimmerSpin {
+      to {
+        --shimmer-angle: 360deg;
+      }
+    }
 
     .ecommerce-header {
       display: flex;
@@ -405,12 +410,12 @@
       gap: 10px;
     }
 
-.ecommerce-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
+    .ecommerce-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
 
     .store-pill {
       display: inline-flex;
@@ -701,9 +706,9 @@
           </div>
           <p>Rekap dan laporan closing penjualan untuk evaluasi serta dokumentasi manajemen.</p>
         </div>
-        <a class="btn" href="https://closingreport.ptmbp.my.id/">
-          Ke Website →
-        </a>
+        <div>
+          <p class="coming-soon-note" style="margin-bottom: 0;">Segera hadir...</p>
+        </div>
       </article>
     </section>
 
@@ -719,7 +724,7 @@
 
     <section class="ecommerce-section" aria-label="Daftar Website E-Commerce">
       <div class="ecommerce-header">
-        <span class="ecommerce-title">E-Commerce & Lokasi Gudang Kami</span>
+        <span class="ecommerce-title">E-Commerce & Lokasi Gudang</span>
       </div>
       <div class="ecommerce-rows">
         <div class="ecommerce-links" aria-label="Tokopedia">
@@ -740,29 +745,29 @@
 
         <div class="ecommerce-links" aria-label="Shopee">
           <a class="store-pill" href="https://shopee.co.id/marvell_tanggerang" target="_blank" rel="noopener noreferrer">
-            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Google Maps" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Marvell Tangerang</span>
             <span class="store-arrow">↗</span>
           </a>
 
           <a class="store-pill" href="https://shopee.co.id/marvell.bsd" target="_blank" rel="noopener noreferrer">
-            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Google Maps" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Marvell BSD</span>
             <span class="store-arrow">↗</span>
           </a>
 
           <a class="store-pill" href="https://shopee.co.id/marvell.tangsel" target="_blank" rel="noopener noreferrer">
-            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Google Maps" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Marvell Tangsel</span>
             <span class="store-arrow">↗</span>
           </a>	 
         </div>
-		<div class="ecommerce-links" aria-label="Shopee">
-			<a class="store-pill" href="https://maps.app.goo.gl/8xz4Wc2vE6yt64gE7" target="_blank" rel="noopener noreferrer">
-            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/gmaps.png" alt="Shopee" class="store-logo" />
+		<div class="ecommerce-links" aria-label="Lokasi Gudang">
+          <a class="store-pill" href="https://maps.app.goo.gl/8xz4Wc2vE6yt64gE7" target="_blank" rel="noopener noreferrer">
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/gmaps.png" alt="Google Maps" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Lokasi Gudang</span>
             <span class="store-arrow">↗</span>
