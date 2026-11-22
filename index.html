@@ -17,6 +17,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal Sistem Informasi - PT MBP</title>
   <style>
+ 
+	@property --shimmer-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.ecommerce-section {
+  position: relative;
+  margin-top: 24px;
+  background: var(--surface);
+  border: 1px solid transparent;
+  border-radius: 16px;
+  padding: 18px 24px;
+  box-shadow: var(--shadow);
+  width: fit-content;
+  max-width: 100%;
+  align-self: center;
+  z-index: 0;
+}
+
+.ecommerce-section::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 17.5px;
+  padding: 3px;
+  background: conic-gradient(
+    from var(--shimmer-angle),
+    var(--border) 0%,
+    var(--border) 68%,
+    #e2a868 80%,
+    #fff3dc 85%,
+    #c87d32 90%,
+    var(--border) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: -1;
+  animation: slowShimmerSpin 9s linear infinite;
+}
+
+@keyframes slowShimmerSpin {
+  to {
+    --shimmer-angle: 360deg;
+  }
+}
+  
     :root {
       --bg: #faf6f0;
       --surface: #ffffff;
@@ -63,7 +115,7 @@
     .brand {
       font-size: 1.55rem;
       font-weight: 700;
-      color: #ffffff	;
+      color: #ffffff;
       letter-spacing: -0.02em;
     }
 
@@ -88,7 +140,7 @@
       max-width: 1200px;
       width: 100%;
       margin: 0 auto;
-      padding: 48px 24px;
+      padding: 44px 24px 36px;
       display: flex;
       flex-direction: column;
     }
@@ -96,7 +148,7 @@
     .hero {
       text-align: center;
       max-width: 680px;
-      margin: 0 auto 40px;
+      margin: 0 auto 36px;
     }
 
     .hero h1 {
@@ -286,9 +338,9 @@
       background: var(--primary-hover);
     }
 
-    /* Area pojok kanan bawah di atas footer */
+    /* Area tombol login input data */
     .bottom-action {
-      margin-top: 28px;
+      margin-top: 24px;
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -315,6 +367,91 @@
       border-color: #c89d72;
       color: var(--primary);
       transform: translateY(-2px);
+    }
+
+    /* Bagian bawah: Daftar Website E-Commerce Aktif */
+.ecommerce-section {
+  margin-top: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 24px;
+  box-shadow: var(--shadow);
+  width: fit-content;
+  max-width: 100%;
+  align-self: center;
+}
+
+    .ecommerce-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .ecommerce-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    .ecommerce-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+.ecommerce-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+    .store-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text);
+      background: #fdfaf5;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .store-pill:hover {
+      transform: translateY(-2px);
+      background: var(--accent-soft);
+      border-color: #c89d72;
+      box-shadow: 0 6px 14px rgba(58, 34, 16, 0.08);
+    }
+
+    .store-logo {
+      height: 18px;
+      width: auto;
+      max-width: 72px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .store-divider {
+      color: #cbb69e;
+      font-weight: 400;
+    }
+
+    .store-arrow {
+      color: var(--muted);
+      font-size: 0.8rem;
     }
 
     /* Modal Form Login Karyawan */
@@ -426,9 +563,9 @@
     }
 
     .login-feedback.success {
-    color: #1d4ed8;
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
     }
 
     .modal-actions {
@@ -473,26 +610,26 @@
       cursor: not-allowed;
     }
 
-footer {
-  text-align: center;
-  padding: 20px 24px;
-  color: var(--muted);
-  font-size: 0.85rem;
-  border-top: 1px solid var(--border);
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
+    footer {
+      text-align: center;
+      padding: 20px 24px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
 
-.footer-logo {
-  height: 22px;
-  width: auto;
-  object-fit: contain;
-  display: inline-block;
-  vertical-align: middle;
-}
+    .footer-logo {
+      height: 22px;
+      width: auto;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body>
@@ -579,6 +716,60 @@ footer {
         LOGIN INPUT DATA
       </button>
     </div>
+
+    <section class="ecommerce-section" aria-label="Daftar Website E-Commerce">
+      <div class="ecommerce-header">
+        <span class="ecommerce-title">E-Commerce & Lokasi Gudang Kami</span>
+      </div>
+      <div class="ecommerce-rows">
+        <div class="ecommerce-links" aria-label="Tokopedia">
+          <a class="store-pill" href="https://www.tokopedia.com/marvell-tangerang" target="_blank" rel="noopener noreferrer">
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/tokopedia.png" alt="Tokopedia" class="store-logo" />
+            <span class="store-divider">|</span>
+            <span>Marvell Tangerang</span>
+            <span class="store-arrow">↗</span>
+          </a>
+
+          <a class="store-pill" href="https://www.tokopedia.com/authorizeddealertng" target="_blank" rel="noopener noreferrer">
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/tokopedia.png" alt="Tokopedia" class="store-logo" />
+            <span class="store-divider">|</span>
+            <span>Authorized dealer Tangerang</span>
+            <span class="store-arrow">↗</span>
+          </a>
+        </div>
+
+        <div class="ecommerce-links" aria-label="Shopee">
+          <a class="store-pill" href="https://shopee.co.id/marvell_tanggerang" target="_blank" rel="noopener noreferrer">
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
+            <span class="store-divider">|</span>
+            <span>Marvell Tangerang</span>
+            <span class="store-arrow">↗</span>
+          </a>
+
+          <a class="store-pill" href="https://shopee.co.id/marvell.bsd" target="_blank" rel="noopener noreferrer">
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
+            <span class="store-divider">|</span>
+            <span>Marvell BSD</span>
+            <span class="store-arrow">↗</span>
+          </a>
+
+          <a class="store-pill" href="https://shopee.co.id/marvell.tangsel" target="_blank" rel="noopener noreferrer">
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
+            <span class="store-divider">|</span>
+            <span>Marvell Tangsel</span>
+            <span class="store-arrow">↗</span>
+          </a>	 
+        </div>
+		<div class="ecommerce-links" aria-label="Shopee">
+			<a class="store-pill" href="https://maps.app.goo.gl/8xz4Wc2vE6yt64gE7" target="_blank" rel="noopener noreferrer">
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/gmaps.png" alt="Shopee" class="store-logo" />
+            <span class="store-divider">|</span>
+            <span>Lokasi Gudang</span>
+            <span class="store-arrow">↗</span>
+          </a>
+		</div>
+      </div>
+    </section>
   </main>
 
   <!-- Modal Form Login Karyawan -->
@@ -622,14 +813,10 @@ footer {
     </div>
   </div>
 
- <footer>
-  <img
-    src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/ptmbp.png"
-    alt="PT. MBP"
-    class="footer-logo"
-  />
-  <span>&copy; 2026. Seluruh hak cipta dilindungi.</span>
-</footer>
+  <footer>
+    <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/ptmbp.png" alt="PT. MBP" class="footer-logo" />
+    <span>&copy; 2026. Seluruh hak cipta dilindungi.</span>
+  </footer>
 
   <script>
     // URL Web App Google Apps Script (/exec) yang sudah di-deploy
