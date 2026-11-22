@@ -50,6 +50,76 @@
       flex-direction: column;
     }
 
+    /* Animasi Transisi Masuk Saat Halaman Dibuka */
+    @keyframes pageEnter {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes headerEnter {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header-inner {
+      animation: headerEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .hero {
+      animation: pageEnter 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+    }
+
+    .grid .card {
+      animation: pageEnter 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .grid .card:nth-child(1) {
+      animation-delay: 0.16s;
+    }
+
+    .grid .card:nth-child(2) {
+      animation-delay: 0.24s;
+    }
+
+    .grid .card:nth-child(3) {
+      animation-delay: 0.32s;
+    }
+
+    .bottom-action {
+      animation: pageEnter 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+    }
+
+    .ecommerce-section {
+      animation: pageEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+    }
+
+    footer {
+      animation: pageEnter 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .header-inner,
+      .hero,
+      .grid .card,
+      .bottom-action,
+      .ecommerce-section,
+      footer {
+        animation: none !important;
+      }
+    }
+
     header {
       background: linear-gradient(90deg, #1d110a 0%, #3b1e0c 55%, #7c3a10 100%);
       border-bottom: 1px solid #4c2710;
@@ -678,7 +748,7 @@
   <header>
     <div class="header-inner">
       <div class="brand">PT. MAKMUR BERUNTUNG PISAN <span>| Portal Sistem Informasi</span></div>
-      <div class="badge">3 Website Aktif</div>
+      <div class="badge">2 Website Aktif</div>
     </div>
   </header>
 
@@ -769,14 +839,12 @@
             <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/tokopedia.png" alt="Tokopedia" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Marvell Tangerang</span>
-            <span class="store-arrow">↗</span>
           </a>
 
           <a class="store-pill" href="https://www.tokopedia.com/authorizeddealertng" target="_blank" rel="noopener noreferrer">
             <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/tokopedia.png" alt="Tokopedia" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Authorized dealer Tangerang</span>
-            <span class="store-arrow">↗</span>
           </a>
         </div>
 
@@ -785,31 +853,27 @@
             <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Marvell Tangerang</span>
-            <span class="store-arrow">↗</span>
           </a>
 
           <a class="store-pill" href="https://shopee.co.id/marvell.bsd" target="_blank" rel="noopener noreferrer">
             <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Marvell BSD</span>
-            <span class="store-arrow">↗</span>
           </a>
 
           <a class="store-pill" href="https://shopee.co.id/marvell.tangsel" target="_blank" rel="noopener noreferrer">
             <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Marvell Tangsel</span>
-            <span class="store-arrow">↗</span>
-          </a>	 
+          </a> 
         </div>
-		<div class="ecommerce-links" aria-label="Lokasi Gudang">
+<div class="ecommerce-links" aria-label="Lokasi Gudang">
           <a class="store-pill" href="https://maps.app.goo.gl/8xz4Wc2vE6yt64gE7" target="_blank" rel="noopener noreferrer">
             <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/gmaps.png" alt="Google Maps" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Lokasi Gudang</span>
-            <span class="store-arrow">↗</span>
           </a>
-		</div>
+</div>
       </div>
     </section>
   </main>
