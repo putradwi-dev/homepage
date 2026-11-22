@@ -201,17 +201,18 @@
       }
     }
 
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* sebelumnya space-between */
+  gap: 20px; /* jarak konsisten antara teks dan tombol */
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
 
     .card:hover {
       transform: translateY(-5px);
@@ -343,20 +344,25 @@
       margin-bottom: 24px;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      text-decoration: none;
-      background: var(--primary);
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 12px 18px;
-      border-radius: 10px;
-      transition: background-color 0.2s ease;
-    }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  background: var(--primary);
+  color: #ffffff;
+  font-family: inherit; /* samakan font dengan body & tombol <a> */
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.25; /* samakan tinggi baris */
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: none;
+  width: 100%; /* samakan lebar penuh di tiap kartu */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
 
     .btn:hover {
       background: var(--primary-hover);
@@ -369,15 +375,6 @@
       cursor: not-allowed;
       pointer-events: none;
       box-shadow: none;
-    }
-
-    .coming-soon-note {
-      margin-top: -36px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #9a5b13;
-      text-align: center;
-      letter-spacing: 0.01em;
     }
 
     /* Area tombol login input data */
@@ -748,7 +745,7 @@
   <header>
     <div class="header-inner">
       <div class="brand">PT. MAKMUR BERUNTUNG PISAN <span>| Portal Sistem Informasi</span></div>
-      <div class="badge">2 Website Aktif</div>
+      <div class="badge">3 Website Aktif</div>
     </div>
   </header>
 
@@ -813,9 +810,13 @@
           </div>
           <p>Rekap dan laporan closing penjualan untuk evaluasi serta dokumentasi manajemen.</p>
         </div>
-        <div>
-          <p class="coming-soon-note" style="margin-bottom: 0;">Segera hadir...</p>
-        </div>
+        <button type="button" class="btn" id="openClosingLoginModal">
+		 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+          Login Untuk Lihat Data
+        </button>
       </article>
     </section>
 
@@ -919,6 +920,36 @@
     </div>
   </div>
 
+  <!-- Modal Form Login Closing Report -->
+  <div class="modal-backdrop" id="closingLoginModal" role="dialog" aria-modal="true" aria-labelledby="closingModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="closingModalTitle">LOGIN — Closing Report</h3>
+        <button type="button" class="btn-close" id="closeClosingLoginModal" aria-label="Tutup">&times;</button>
+      </div>
+      <p class="modal-desc">Masuk menggunakan akun internal untuk<br>melihat rekap dan laporan closing penjualan.</p>
+
+      <form id="closingLoginForm">
+        <div class="form-group">
+          <label for="closingUsername">Username</label>
+          <input type="text" id="closingUsername" name="closingUsername" placeholder="Masukkan ID atau username" autocomplete="username" required />
+        </div>
+
+        <div class="form-group">
+          <label for="closingPassword">Password</label>
+          <input type="password" id="closingPassword" name="closingPassword" placeholder="Masukkan password" autocomplete="current-password" required />
+        </div>
+
+        <div class="login-feedback" id="closingLoginFeedback" role="status" aria-live="polite"></div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="cancelClosingLoginModal">Batal</button>
+          <button type="submit" class="btn-submit" id="submitClosingLoginBtn">Masuk</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-main-row">
       <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/ptmbp.png" alt="PT. MBP" class="footer-logo" />
@@ -1013,7 +1044,8 @@
           body: JSON.stringify({
             username: username,
             password: password,
-            target: target
+            target: target,
+            flow: 'input'
           })
         });
 
@@ -1046,6 +1078,114 @@
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Masuk';
+      }
+    });
+
+    // Modal Login Closing Report
+    const openClosingBtn = document.getElementById('openClosingLoginModal');
+    const closeClosingBtn = document.getElementById('closeClosingLoginModal');
+    const cancelClosingBtn = document.getElementById('cancelClosingLoginModal');
+    const closingModal = document.getElementById('closingLoginModal');
+    const closingForm = document.getElementById('closingLoginForm');
+    const closingFeedback = document.getElementById('closingLoginFeedback');
+    const submitClosingBtn = document.getElementById('submitClosingLoginBtn');
+
+    function setClosingFeedback(type, message) {
+      closingFeedback.className = 'login-feedback show ' + type;
+      closingFeedback.textContent = message;
+    }
+
+    function clearClosingFeedback() {
+      closingFeedback.className = 'login-feedback';
+      closingFeedback.textContent = '';
+    }
+
+    function openClosingModal() {
+      clearClosingFeedback();
+      closingModal.classList.add('active');
+      document.getElementById('closingUsername').focus();
+    }
+
+    function closeClosingModal() {
+      closingModal.classList.remove('active');
+    }
+
+    if (openClosingBtn) {
+      openClosingBtn.addEventListener('click', openClosingModal);
+    }
+    closeClosingBtn.addEventListener('click', closeClosingModal);
+    cancelClosingBtn.addEventListener('click', closeClosingModal);
+
+    closingModal.addEventListener('click', (e) => {
+      if (e.target === closingModal) {
+        closeClosingModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && closingModal.classList.contains('active')) {
+        closeClosingModal();
+      }
+    });
+
+    closingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearClosingFeedback();
+
+      const username = document.getElementById('closingUsername').value.trim();
+      const password = document.getElementById('closingPassword').value;
+
+      if (!AUTH_WEB_APP_URL || AUTH_WEB_APP_URL.includes('GANTI_DENGAN_URL_WEB_APP')) {
+        setClosingFeedback('error', 'URL Web App Google Apps Script belum diatur pada file index.html.');
+        return;
+      }
+
+      submitClosingBtn.disabled = true;
+      submitClosingBtn.textContent = 'Memeriksa...';
+
+      try {
+        const response = await fetch(AUTH_WEB_APP_URL, {
+          method: 'POST',
+          redirect: 'follow',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+            target: 'closing'
+          })
+        });
+
+        const data = await response.json();
+
+        if (!data || !data.success) {
+          setClosingFeedback('error', (data && data.message) || 'Login gagal. Periksa kembali akun Anda.');
+          return;
+        }
+
+        if (!data.redirectUrl) {
+          setClosingFeedback('error', 'URL tujuan Closing Report belum diatur pada server.');
+          return;
+        }
+
+        sessionStorage.setItem('mbp_auth_session', JSON.stringify({
+          user: data.user,
+          target: 'closing',
+          loggedInAt: new Date().toISOString()
+        }));
+
+        const nama = (data.user && data.user.nama_karyawan) || username;
+        setClosingFeedback('success', 'Login berhasil, selamat datang ' + nama + '. Mengalihkan ke ' + (data.targetLabel || 'Closing Report') + '...');
+
+        setTimeout(() => {
+          window.location.href = data.redirectUrl;
+        }, 400);
+      } catch (err) {
+        setClosingFeedback('error', 'Gagal terhubung ke server autentikasi. Coba beberapa saat lagi.');
+      } finally {
+        submitClosingBtn.disabled = false;
+        submitClosingBtn.textContent = 'Masuk';
       }
     });
   </script>
