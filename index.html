@@ -623,9 +623,46 @@
       border-top: 1px solid var(--border);
       background: var(--surface);
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .footer-main-row {
+      display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
+    }
+
+    .footer-powered {
+      color: var(--muted);
+      font-size: 0.82rem;
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .footer-platform-icon {
+      height: 18px;
+      width: auto;
+      max-width: 78px;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .footer-platform-icon.icon-apps {
+      height: 23px;
+      max-width: 88px;
+    }
+
+    .footer-sep {
+      color: #cbb69e;
+      font-weight: 400;
     }
 
     .footer-logo {
@@ -745,21 +782,21 @@
 
         <div class="ecommerce-links" aria-label="Shopee">
           <a class="store-pill" href="https://shopee.co.id/marvell_tanggerang" target="_blank" rel="noopener noreferrer">
-            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Google Maps" class="store-logo" />
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Marvell Tangerang</span>
             <span class="store-arrow">↗</span>
           </a>
 
           <a class="store-pill" href="https://shopee.co.id/marvell.bsd" target="_blank" rel="noopener noreferrer">
-            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Google Maps" class="store-logo" />
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Marvell BSD</span>
             <span class="store-arrow">↗</span>
           </a>
 
           <a class="store-pill" href="https://shopee.co.id/marvell.tangsel" target="_blank" rel="noopener noreferrer">
-            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Google Maps" class="store-logo" />
+            <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/shopee.png" alt="Shopee" class="store-logo" />
             <span class="store-divider">|</span>
             <span>Marvell Tangsel</span>
             <span class="store-arrow">↗</span>
@@ -819,8 +856,18 @@
   </div>
 
   <footer>
-    <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/ptmbp.png" alt="PT. MBP" class="footer-logo" />
-    <span>&copy; 2026. Seluruh hak cipta dilindungi.</span>
+    <div class="footer-main-row">
+      <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/ptmbp.png" alt="PT. MBP" class="footer-logo" />
+      <span>&copy; 2026. Seluruh hak cipta dilindungi.</span>
+    </div>
+    <div class="footer-powered">
+      <span>Powered by</span>
+      <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/github.png" alt="GitHub" class="footer-platform-icon" />
+      <span class="footer-sep">|</span>
+      <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/idwebhost.png" alt="IDwebhost" class="footer-platform-icon" />
+      <span class="footer-sep">|</span>
+      <img src="https://raw.githubusercontent.com/putradwi-dev/homepage/main/apps.png" alt="Google Apps Script" class="footer-platform-icon icon-apps" />
+    </div>
   </footer>
 
   <script>
